@@ -1,0 +1,43 @@
+{
+  "coord": {
+    "lon": 24.11,
+    "lat": 56.95
+  },
+  "weather": [
+    {
+      "id": 804,
+      "main": "Clouds",
+      "description": "overcast clouds",
+      "icon": "04d"
+    }
+  ],
+  "base": "stations",
+  "main": {
+    "temp": 286.95,
+    "pressure": 1013,
+    "humidity": 87,
+    "temp_min": 286.48,
+    "temp_max": 288.15
+  },
+  "visibility": 10000,
+  "wind": {
+    "speed": 3.1,
+    "deg": 180
+  },
+  "clouds": {
+    "all": 90
+  },
+  "dt": 1571399244,
+  "sys": {
+    "type": 1,
+    "id": 1876,
+    "message": 0.0067,
+    "country": "LV",
+    "sunrise": 1571374907,
+    "sunset": 1571411729
+  },
+  "timezone": 10800,
+  "id": 456172,
+  "name": "Riga",
+  "cod": 200
+}

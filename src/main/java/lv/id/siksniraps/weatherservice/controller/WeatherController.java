@@ -1,16 +1,29 @@
 package lv.id.siksniraps.weatherservice.controller;
 
 import lv.id.siksniraps.weatherservice.model.Weather;
-import org.apache.commons.lang.NotImplementedException;
+import lv.id.siksniraps.weatherservice.service.WeatherService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController("weather")
+import javax.servlet.http.HttpServletRequest;
+
+@RestController("/weather")
+@RequestMapping("/weather")
 public class WeatherController {
 
+    private final WeatherService weatherService;
+
+    @Autowired
+    public WeatherController(WeatherService weatherService) {
+        this.weatherService = weatherService;
+    }
+
     @GetMapping("/")
-    public Weather getWeather() {
-        throw new NotImplementedException();
+    public Weather getWeather(HttpServletRequest request) {
+        String ip = request.getRemoteAddr();
+        return weatherService.fetchWeatherFromIp(ip);
     }
 
 }

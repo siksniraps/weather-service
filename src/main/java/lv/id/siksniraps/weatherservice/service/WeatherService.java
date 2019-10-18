@@ -1,7 +1,7 @@
 package lv.id.siksniraps.weatherservice.service;
 
-import org.springframework.stereotype.Service;
+import lv.id.siksniraps.weatherservice.model.Weather;
 
-@Service
 public interface WeatherService {
+    Weather fetchWeatherFromIp(String ip);
 }
