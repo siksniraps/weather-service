@@ -1,10 +1,11 @@
 package lv.id.siksniraps.weatherservice.component;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import lv.id.siksniraps.weatherservice.config.WeatherApiPropertyConfig;
 import lv.id.siksniraps.weatherservice.model.Weather;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.RequestEntity;
+import org.springframework.context.annotation.Profile;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
@@ -12,24 +13,23 @@ import org.springframework.web.client.RestTemplate;
 @Component
 public class WeatherComponentImpl implements WeatherComponent {
 
-    private String url;
-    private String apiKey;
+    private Logger logger = LoggerFactory.getLogger(WeatherComponentImpl.class);
+
+    private final RestTemplate restTemplate;
+    private final WeatherApiPropertyConfig config;
 
     @Autowired
-    public WeatherComponentImpl(
-            @Value("${weatherApi.url}") String url,
-            @Value("${weatherApi.apiKey}") String apiKey) {
-        this.url = url;
-        this.apiKey = apiKey;
+    public WeatherComponentImpl(RestTemplate restTemplate, WeatherApiPropertyConfig config) {
+        this.restTemplate = restTemplate;
+        this.config = config;
     }
 
-
     public ResponseEntity<Weather> fetchWeatherByCity(String city) {
-        RestTemplate restTemplate = new RestTemplate();
+        logger.debug("Fetching weather data for city=" + city);
         return restTemplate.getForEntity(
-                url + "?units=metric&APPID={apiKey}&q={city}",
+                config.getUrl() + "?units=metric&APPID={apiKey}&q={city}",
                 Weather.class,
-                apiKey, city
+                config.getKey(), city
         );
     }
 

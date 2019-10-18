@@ -1,31 +1,35 @@
 package lv.id.siksniraps.weatherservice.component;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import lv.id.siksniraps.weatherservice.config.GeoLocationApiPropertyConfig;
+import lv.id.siksniraps.weatherservice.config.WeatherApiPropertyConfig;
 import lv.id.siksniraps.weatherservice.model.Location;
-import lv.id.siksniraps.weatherservice.model.Weather;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Profile;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 @Component
+@Profile("!dev")
 public class GeoLocationComponentImpl implements GeoLocationComponent {
-    private String url;
-    private String apiKey;
+
+    private Logger logger = LoggerFactory.getLogger(WeatherComponentImpl.class);
+
+    private final RestTemplate restTemplate;
+    private final GeoLocationApiPropertyConfig config;
 
     @Autowired
-    public GeoLocationComponentImpl(
-            @Value("${geoLocationApi.url}")String url,
-            @Value("${geoLocationApi.apiKey}")String apiKey) {
-        this.url = url;
-        this.apiKey = apiKey;
+    public GeoLocationComponentImpl(RestTemplate restTemplate, GeoLocationApiPropertyConfig config) {
+        this.restTemplate = restTemplate;
+        this.config = config;
     }
 
-
     public ResponseEntity<Location> fetchLocation(String ip) {
-        RestTemplate restTemplate = new RestTemplate();
-        return restTemplate.getForEntity(url + "?apiKey={apiKey}&ip={ip}", Location.class, apiKey, ip);
+        logger.debug("Fetching location data for ip=" + ip);
+        return restTemplate.getForEntity(config.getUrl() + "?apiKey={apiKey}&ip={ip}",
+                Location.class, config.getKey(), ip);
     }
 
 }

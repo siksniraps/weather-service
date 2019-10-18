@@ -5,33 +5,33 @@
   },
   "weather": [
     {
-      "id": 804,
-      "main": "Clouds",
-      "description": "overcast clouds",
-      "icon": "04d"
+      "id": 800,
+      "main": "Clear",
+      "description": "clear sky",
+      "icon": "01n"
     }
   ],
   "base": "stations",
   "main": {
-    "temp": 286.95,
-    "pressure": 1013,
-    "humidity": 87,
-    "temp_min": 286.48,
-    "temp_max": 288.15
+    "temp": 12.44,
+    "pressure": 1012,
+    "humidity": 93,
+    "temp_min": 11.67,
+    "temp_max": 13
   },
   "visibility": 10000,
   "wind": {
-    "speed": 3.1,
-    "deg": 180
+    "speed": 2.6,
+    "deg": 150
   },
   "clouds": {
-    "all": 90
+    "all": 0
   },
-  "dt": 1571399244,
+  "dt": 1571424625,
   "sys": {
     "type": 1,
     "id": 1876,
-    "message": 0.0067,
+    "message": 0.0065,
     "country": "LV",
     "sunrise": 1571374907,
     "sunset": 1571411729

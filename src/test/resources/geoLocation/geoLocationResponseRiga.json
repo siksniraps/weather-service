@@ -1,0 +1,37 @@
+{
+  "ip": "92.240.64.0",
+  "continent_code": "EU",
+  "continent_name": "Europe",
+  "country_code2": "LV",
+  "country_code3": "LVA",
+  "country_name": "Latvia",
+  "country_capital": "Riga",
+  "state_prov": "Riga",
+  "district": "Centra rajons",
+  "city": "Riga",
+  "zipcode": "LV-1520",
+  "latitude": "56.94860",
+  "longitude": "24.11820",
+  "is_eu": true,
+  "calling_code": "+371",
+  "country_tld": ".lv",
+  "languages": "lv,ru,lt",
+  "country_flag": "https://ipgeolocation.io/static/flags/lv_64.png",
+  "geoname_id": "456172",
+  "isp": "SigmaNet komerctikls",
+  "connection_type": "",
+  "organization": "Institute of Mathematics and Computer Science of University of Latvia",
+  "currency": {
+    "code": "EUR",
+    "name": "Euro",
+    "symbol": "€"
+  },
+  "time_zone": {
+    "name": "Europe/Riga",
+    "offset": 2,
+    "current_time": "2019-10-18 18:40:02.636+0300",
+    "current_time_unix": 1571413202.636,
+    "is_dst": true,
+    "dst_savings": 1
+  }
+}

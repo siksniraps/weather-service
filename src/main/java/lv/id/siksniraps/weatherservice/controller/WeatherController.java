@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 
-@RestController("/weather")
+@RestController
 @RequestMapping("/weather")
 public class WeatherController {
 
