@@ -22,7 +22,10 @@ public class Weather {
 
     @JsonProperty("weather")
     private void unpackWeather(List<Map<String, Object>> weather) {
-        this.description = (String) weather.get(0).get("description");
+        this.description = (String) weather.stream()
+                .findFirst()
+                .map(w -> w.get("description"))
+                .orElse("");
     }
 
     @JsonProperty("main")

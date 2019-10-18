@@ -1,6 +1,7 @@
 package lv.id.siksniraps.weatherservice.service;
 
-import org.springframework.stereotype.Service;
+import lv.id.siksniraps.weatherservice.model.Location;
 
 public interface GeoLocationService {
+    Location fetchLocationFromIp(String ip);
 }

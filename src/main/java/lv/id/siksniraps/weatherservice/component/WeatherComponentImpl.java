@@ -17,8 +17,8 @@ public class WeatherComponentImpl implements WeatherComponent {
 
     @Autowired
     public WeatherComponentImpl(
-            @Value("${weatherApi.url}")String url,
-            @Value("${weatherApi.apiKey}")String apiKey) {
+            @Value("${weatherApi.url}") String url,
+            @Value("${weatherApi.apiKey}") String apiKey) {
         this.url = url;
         this.apiKey = apiKey;
     }
@@ -26,8 +26,11 @@ public class WeatherComponentImpl implements WeatherComponent {
 
     public ResponseEntity<Weather> fetchWeatherByCity(String city) {
         RestTemplate restTemplate = new RestTemplate();
-        ObjectMapper mapper = new ObjectMapper();
-        return restTemplate.getForEntity(url + "?APPID={apiKey}&q={city}", Weather.class, apiKey, city);
+        return restTemplate.getForEntity(
+                url + "?units=metric&APPID={apiKey}&q={city}",
+                Weather.class,
+                apiKey, city
+        );
     }
 
 
