@@ -5,12 +5,10 @@ import lv.id.siksniraps.weatherservice.service.WeatherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.core.env.Profiles;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.HttpClientErrorException;
 
 import javax.servlet.http.HttpServletRequest;
 import java.net.InetAddress;
@@ -36,7 +34,7 @@ public class WeatherController {
     public ResponseEntity<Weather> getWeather(HttpServletRequest request) {
         String ip = request.getRemoteAddr();
         if (!validateIp(ip)) {
-            throw new HttpClientErrorException(HttpStatus.BAD_REQUEST, "Invalid ip");
+            return badRequest().build();
         }
         return ok(weatherService.fetchWeatherFromIp(ip));
     }
