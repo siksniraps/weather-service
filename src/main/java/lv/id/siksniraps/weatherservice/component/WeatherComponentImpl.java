@@ -17,7 +17,6 @@ import static java.util.Optional.empty;
 import static java.util.Optional.ofNullable;
 
 @Component
-@Profile("!dev")
 public class WeatherComponentImpl implements WeatherComponent {
 
     private Logger logger = LoggerFactory.getLogger(WeatherComponentImpl.class);
@@ -43,6 +42,7 @@ public class WeatherComponentImpl implements WeatherComponent {
         return ofNullable(response.getBody());
     }
 
+    @SuppressWarnings("unused")
     public Optional<Weather> fallbackFetchWeatherByCity(String city) {
         logger.warn("External weather service unavailable");
         return empty();

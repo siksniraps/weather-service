@@ -16,7 +16,6 @@ import static java.util.Optional.empty;
 import static java.util.Optional.ofNullable;
 
 @Component
-@Profile("!dev")
 public class GeoLocationComponentImpl implements GeoLocationComponent {
 
     private Logger logger = LoggerFactory.getLogger(WeatherComponentImpl.class);
@@ -38,6 +37,7 @@ public class GeoLocationComponentImpl implements GeoLocationComponent {
                 Location.class, config.getKey(), ip).getBody());
     }
 
+    @SuppressWarnings("unused")
     public Optional<Location> fallbackFetchLocation (String ip) {
         logger.warn("External geolocation service unavailable");
         return empty();

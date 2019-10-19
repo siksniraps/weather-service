@@ -13,7 +13,6 @@ import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.PostConstruct;
 import java.io.IOException;
-import java.util.Optional;
 
 import static lv.id.siksniraps.weatherservice.util.Util.mockNextJsonResponse;
 import static org.junit.jupiter.api.Assertions.assertEquals;

@@ -28,8 +28,6 @@ class GeoLocationComponentTest {
 
     @Value("${geolocation-json.riga}")
     private String geoLocationJsonResponseRiga;
-    @Value("${geolocation-json.bad-response}")
-    private String badResponse;
 
     @Autowired
     GeoLocationComponentTest(RestTemplate restTemplate, GeoLocationComponent geoLocationComponent) {

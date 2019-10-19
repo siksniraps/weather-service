@@ -5,7 +5,6 @@ import lv.id.siksniraps.weatherservice.component.GeoLocationComponent;
 import lv.id.siksniraps.weatherservice.model.Location;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Profile;
 import org.springframework.core.io.ClassPathResource;
@@ -23,7 +22,6 @@ import static java.util.Optional.of;
 public class MockGeoLocationComponent implements GeoLocationComponent {
 
     private Logger logger = LoggerFactory.getLogger(MockGeoLocationComponent.class);
-
 
     @Override
     public Optional<Location> fetchLocation(String ip) {

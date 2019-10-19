@@ -17,7 +17,8 @@ import static lv.id.siksniraps.weatherservice.service.GeoLocationServiceImpl.GEO
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.anything;
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withServerError;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @AutoConfigureMockMvc
 @SpringBootTest
@@ -47,9 +48,16 @@ class WeatherControllerTest {
     }
 
     @Test
-    void testGetWeatherUnavailable() throws Exception {
+    void testGetWeatherBadIp() throws Exception {
         mockServer.expect(anything()).andRespond(withServerError());
         mockMvc.perform(get("/weather").with(remoteAddr("not an ip")))
+                .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    void testGetWeatherUnavailable() throws Exception {
+        mockServer.expect(anything()).andRespond(withServerError());
+        mockMvc.perform(get("/weather"))
                 .andExpect(status().isServiceUnavailable())
                 .andExpect(content().string(GEOLOCATION_SERVICE_UNAVAILABLE));
     }

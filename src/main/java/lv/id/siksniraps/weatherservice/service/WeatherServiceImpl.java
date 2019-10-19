@@ -5,9 +5,12 @@ import lv.id.siksniraps.weatherservice.exception.ExternalServiceUnavailableExcep
 import lv.id.siksniraps.weatherservice.model.Location;
 import lv.id.siksniraps.weatherservice.model.Weather;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+
+import static lv.id.siksniraps.weatherservice.config.CacheConfig.WEATHER_CACHE;
 
 @Service
 public class WeatherServiceImpl implements WeatherService {
@@ -26,7 +29,12 @@ public class WeatherServiceImpl implements WeatherService {
     @Override
     public Weather fetchWeatherFromIp(String ip) {
         Location location = geoLocationService.fetchLocationFromIp(ip);
-        Optional<Weather> weatherResponse = weatherComponent.fetchWeatherByCity(location.getCity());
+        return fetchWeatherByCity(location.getCity());
+    }
+
+    @Cacheable(value = WEATHER_CACHE, key = "#city")
+    public Weather fetchWeatherByCity(String city) {
+        Optional<Weather> weatherResponse = weatherComponent.fetchWeatherByCity(city);
         return weatherResponse.orElseThrow(() -> new ExternalServiceUnavailableException(WEATHER_SERVICE_UNAVAILABLE));
     }
 }
