@@ -53,10 +53,10 @@ class CircuitBreakerTest {
 
     @Test
     void testWeatherCircuitBreaker() throws IOException, InterruptedException {
-        tripCircuitBreaker(() -> weatherComponent.fetchWeatherByCity(TestData.RIGA.getCity()));
+        tripCircuitBreaker(() -> weatherComponent.fetchWeather(TestData.RIGA));
         mockNextJsonResponse(mockServer, weatherJsonResponseRiga);
         waitForCircuitBreakerToOpen();
-        assertTrue(weatherComponent.fetchWeatherByCity(TestData.RIGA.getCity()).isEmpty());
+        assertTrue(weatherComponent.fetchWeather(TestData.RIGA).isEmpty());
     }
 
     @Test

@@ -2,6 +2,7 @@ package lv.id.siksniraps.weatherservice.mock;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lv.id.siksniraps.weatherservice.component.WeatherComponent;
+import lv.id.siksniraps.weatherservice.model.Location;
 import lv.id.siksniraps.weatherservice.model.Weather;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,8 +25,8 @@ public class MockWeatherComponent implements WeatherComponent {
     private Logger logger = LoggerFactory.getLogger(MockWeatherComponent.class);
 
     @Override
-    public Optional<Weather> fetchWeatherByCity(String city) {
-        String pathName = "jsons/weather/" + city + ".json";
+    public Optional<Weather> fetchWeather(Location location) {
+        String pathName = "jsons/weather/" + location + ".json";
         ObjectMapper mapper = new ObjectMapper();
         try {
             Weather weather = mapper.readValue(new ClassPathResource(pathName).getFile(), Weather.class);

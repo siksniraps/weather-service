@@ -44,7 +44,7 @@ class WeatherComponentTest {
     @Test
     void testWeatherDeserialization() throws IOException {
         mockNextJsonResponse(mockServer, weatherJsonResponseRiga);
-        Weather weather = weatherComponent.fetchWeatherByCity("Riga").orElseThrow();
+        Weather weather = weatherComponent.fetchWeather(TestData.RIGA).orElseThrow();
         assertEquals(TestData.WEATHER_RIGA, weather);
     }
 
