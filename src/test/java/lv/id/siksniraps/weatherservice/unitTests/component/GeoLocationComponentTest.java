@@ -13,7 +13,6 @@ import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.PostConstruct;
 import java.io.IOException;
-import java.util.Optional;
 
 import static lv.id.siksniraps.weatherservice.util.Util.mockNextJsonResponse;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -46,7 +45,7 @@ class GeoLocationComponentTest {
     @Test
     void testGeoLocationDeserialization() throws IOException {
         mockNextJsonResponse(mockServer, geoLocationJsonResponseRiga);
-        Location location = geoLocationComponent.fetchLocation("127.0.0.1").orElseThrow();
+        Location location = geoLocationComponent.fetchLocation(TestData.RIGA.getIp()).orElseThrow();
         assertEquals(TestData.RIGA, location);
     }
 

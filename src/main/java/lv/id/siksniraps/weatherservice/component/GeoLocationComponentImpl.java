@@ -6,6 +6,7 @@ import lv.id.siksniraps.weatherservice.model.Location;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
@@ -15,6 +16,7 @@ import static java.util.Optional.empty;
 import static java.util.Optional.ofNullable;
 
 @Component
+@Profile("!dev")
 public class GeoLocationComponentImpl implements GeoLocationComponent {
 
     private Logger logger = LoggerFactory.getLogger(WeatherComponentImpl.class);

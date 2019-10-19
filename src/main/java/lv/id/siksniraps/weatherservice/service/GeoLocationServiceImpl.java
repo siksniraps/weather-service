@@ -5,10 +5,10 @@ import lv.id.siksniraps.weatherservice.exception.ExternalServiceUnavailableExcep
 import lv.id.siksniraps.weatherservice.model.Location;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.UnavailableException;
-
 @Service
 public class GeoLocationServiceImpl implements GeoLocationService {
+
+    public static final String GEOLOCATION_SERVICE_UNAVAILABLE = "Geolocation service is temporary unavailable";
 
     private final GeoLocationComponent geoLocationComponent;
 
@@ -17,9 +17,9 @@ public class GeoLocationServiceImpl implements GeoLocationService {
     }
 
     @Override
-    public Location fetchLocationFromIp(String ip) throws UnavailableException {
+    public Location fetchLocationFromIp(String ip) {
         return geoLocationComponent.fetchLocation(ip)
-                .orElseThrow(() -> new ExternalServiceUnavailableException("Geolocation service is temporary unavailable"));
+                .orElseThrow(() -> new ExternalServiceUnavailableException(GEOLOCATION_SERVICE_UNAVAILABLE));
     }
 
 }

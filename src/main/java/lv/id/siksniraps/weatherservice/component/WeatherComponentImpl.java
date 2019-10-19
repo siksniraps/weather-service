@@ -6,6 +6,7 @@ import lv.id.siksniraps.weatherservice.model.Weather;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
@@ -16,6 +17,7 @@ import static java.util.Optional.empty;
 import static java.util.Optional.ofNullable;
 
 @Component
+@Profile("!dev")
 public class WeatherComponentImpl implements WeatherComponent {
 
     private Logger logger = LoggerFactory.getLogger(WeatherComponentImpl.class);

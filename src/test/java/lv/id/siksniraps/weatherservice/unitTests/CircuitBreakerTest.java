@@ -2,6 +2,7 @@ package lv.id.siksniraps.weatherservice.unitTests;
 
 import lv.id.siksniraps.weatherservice.component.GeoLocationComponent;
 import lv.id.siksniraps.weatherservice.component.WeatherComponent;
+import lv.id.siksniraps.weatherservice.util.TestData;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -52,18 +53,18 @@ class CircuitBreakerTest {
 
     @Test
     void testWeatherCircuitBreaker() throws IOException, InterruptedException {
-        tripCircuitBreaker(() -> weatherComponent.fetchWeatherByCity("Riga"));
+        tripCircuitBreaker(() -> weatherComponent.fetchWeatherByCity(TestData.RIGA.getCity()));
         mockNextJsonResponse(mockServer, weatherJsonResponseRiga);
         waitForCircuitBreakerToOpen();
-        assertTrue(weatherComponent.fetchWeatherByCity("Riga").isEmpty());
+        assertTrue(weatherComponent.fetchWeatherByCity(TestData.RIGA.getCity()).isEmpty());
     }
 
     @Test
     void testGeolocationCircuitBreaker() throws IOException, InterruptedException {
-        tripCircuitBreaker(() -> geoLocationComponent.fetchLocation("127.0.0.1"));
+        tripCircuitBreaker(() -> geoLocationComponent.fetchLocation(TestData.RIGA.getIp()));
         mockNextJsonResponse(mockServer, geolocationJsonResponseRiga);
         waitForCircuitBreakerToOpen();
-        assertTrue(geoLocationComponent.fetchLocation("127.0.0.1").isEmpty());
+        assertTrue(geoLocationComponent.fetchLocation(TestData.RIGA.getIp()).isEmpty());
     }
 
     private void tripCircuitBreaker(Runnable action) {

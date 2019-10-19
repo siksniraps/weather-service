@@ -30,8 +30,6 @@ class WeatherComponentTest {
 
     @Value("${weather-json.riga}")
     private String weatherJsonResponseRiga;
-    @Value("${weather-json.bad-response}")
-    private String badResponse;
 
     @Autowired
     WeatherComponentTest(RestTemplate restTemplate, WeatherComponent weatherComponent) {

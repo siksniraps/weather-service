@@ -5,7 +5,6 @@ import lv.id.siksniraps.weatherservice.component.WeatherComponent;
 import lv.id.siksniraps.weatherservice.model.Weather;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Profile;
 import org.springframework.core.io.ClassPathResource;
@@ -24,11 +23,9 @@ public class MockWeatherComponent implements WeatherComponent {
 
     private Logger logger = LoggerFactory.getLogger(MockWeatherComponent.class);
 
-    @Value("${weather-json.riga}")
-    private String pathName;
-
     @Override
     public Optional<Weather> fetchWeatherByCity(String city) {
+        String pathName = "jsons/weather/" + city + ".json";
         ObjectMapper mapper = new ObjectMapper();
         try {
             Weather weather = mapper.readValue(new ClassPathResource(pathName).getFile(), Weather.class);

@@ -24,11 +24,10 @@ public class MockGeoLocationComponent implements GeoLocationComponent {
 
     private Logger logger = LoggerFactory.getLogger(MockGeoLocationComponent.class);
 
-    @Value("${geolocation-json.riga}")
-    private String pathName;
 
     @Override
     public Optional<Location> fetchLocation(String ip) {
+        String pathName = "jsons/geoLocation/" + ip + ".json";
         ObjectMapper mapper = new ObjectMapper();
         try {
             Location weather = mapper.readValue(new ClassPathResource(pathName).getFile(), Location.class);

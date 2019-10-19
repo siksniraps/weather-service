@@ -21,7 +21,7 @@ public class WeatherController {
         this.weatherService = weatherService;
     }
 
-    @GetMapping("/")
+    @GetMapping
     public Weather getWeather(HttpServletRequest request) throws UnavailableException {
         String ip = request.getRemoteAddr();
         return weatherService.fetchWeatherFromIp(ip);
