@@ -1,8 +1,11 @@
 package lv.id.siksniraps.weatherservice.service;
 
 import lv.id.siksniraps.weatherservice.component.GeoLocationComponent;
+import lv.id.siksniraps.weatherservice.exception.ExternalServiceUnavailableException;
 import lv.id.siksniraps.weatherservice.model.Location;
 import org.springframework.stereotype.Service;
+
+import javax.servlet.UnavailableException;
 
 @Service
 public class GeoLocationServiceImpl implements GeoLocationService {
@@ -13,8 +16,10 @@ public class GeoLocationServiceImpl implements GeoLocationService {
         this.geoLocationComponent = geoLocationComponent;
     }
 
-    public Location fetchLocationFromIp(String ip) {
-        return geoLocationComponent.fetchLocation(ip).getBody();
+    @Override
+    public Location fetchLocationFromIp(String ip) throws UnavailableException {
+        return geoLocationComponent.fetchLocation(ip)
+                .orElseThrow(() -> new ExternalServiceUnavailableException("Geolocation service is temporary unavailable"));
     }
 
 }

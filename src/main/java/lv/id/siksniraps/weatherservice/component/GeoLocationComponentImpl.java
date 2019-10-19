@@ -1,16 +1,18 @@
 package lv.id.siksniraps.weatherservice.component;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import lv.id.siksniraps.weatherservice.config.GeoLocationApiPropertyConfig;
-import lv.id.siksniraps.weatherservice.config.WeatherApiPropertyConfig;
 import lv.id.siksniraps.weatherservice.model.Location;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Profile;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
-import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.Optional;
+
+import static java.util.Optional.empty;
+import static java.util.Optional.ofNullable;
 
 @Component
 public class GeoLocationComponentImpl implements GeoLocationComponent {
@@ -26,10 +28,17 @@ public class GeoLocationComponentImpl implements GeoLocationComponent {
         this.config = config;
     }
 
-    public ResponseEntity<Location> fetchLocation(String ip) {
+    @HystrixCommand(fallbackMethod = "fallbackFetchLocation")
+    @Override
+    public Optional<Location> fetchLocation(String ip) {
         logger.debug("Fetching location data for ip=" + ip);
-        return restTemplate.getForEntity(config.getUrl() + "?apiKey={apiKey}&ip={ip}",
-                Location.class, config.getKey(), ip);
+        return ofNullable(restTemplate.getForEntity(config.getUrl() + "?apiKey={apiKey}&ip={ip}",
+                Location.class, config.getKey(), ip).getBody());
+    }
+
+    public Optional<Location> fallbackFetchLocation (String ip) {
+        logger.warn("External geolocation service unavailable");
+        return empty();
     }
 
 }

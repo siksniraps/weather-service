@@ -9,13 +9,13 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Profile;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.util.Optional;
 
-import static org.springframework.http.ResponseEntity.notFound;
-import static org.springframework.http.ResponseEntity.ok;
+import static java.util.Optional.empty;
+import static java.util.Optional.of;
 
 @Primary
 @Component
@@ -28,14 +28,14 @@ public class MockWeatherComponent implements WeatherComponent {
     private String pathName;
 
     @Override
-    public ResponseEntity<Weather> fetchWeatherByCity(String city) {
+    public Optional<Weather> fetchWeatherByCity(String city) {
         ObjectMapper mapper = new ObjectMapper();
         try {
             Weather weather = mapper.readValue(new ClassPathResource(pathName).getFile(), Weather.class);
-            return ok(weather);
+            return of(weather);
         } catch (IOException e) {
             logger.debug("Failed to read weather data from " + pathName, e);
-            return notFound().build();
+            return empty();
         }
     }
 }

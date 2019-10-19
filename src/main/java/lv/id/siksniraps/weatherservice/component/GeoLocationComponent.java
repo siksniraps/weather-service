@@ -1,8 +1,9 @@
 package lv.id.siksniraps.weatherservice.component;
 
 import lv.id.siksniraps.weatherservice.model.Location;
-import org.springframework.http.ResponseEntity;
+
+import java.util.Optional;
 
 public interface GeoLocationComponent {
-    ResponseEntity<Location> fetchLocation(String ip);
+    Optional<Location> fetchLocation(String ip);
 }

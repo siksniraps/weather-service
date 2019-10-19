@@ -1,8 +1,9 @@
 package lv.id.siksniraps.weatherservice.component;
 
 import lv.id.siksniraps.weatherservice.model.Weather;
-import org.springframework.http.ResponseEntity;
+
+import java.util.Optional;
 
 public interface WeatherComponent {
-    ResponseEntity<Weather> fetchWeatherByCity(String city);
+    Optional<Weather> fetchWeatherByCity(String city);
 }
