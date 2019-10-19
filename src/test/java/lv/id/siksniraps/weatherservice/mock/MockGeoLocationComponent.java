@@ -25,7 +25,7 @@ public class MockGeoLocationComponent implements GeoLocationComponent {
 
     private Logger logger = LoggerFactory.getLogger(MockGeoLocationComponent.class);
 
-    @Value("${geoLocationJson.Riga}")
+    @Value("${geolocation-json.riga}")
     private String pathName;
 
     @Override

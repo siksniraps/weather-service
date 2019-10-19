@@ -9,10 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 @Component
-@Profile("!dev")
 public class GeoLocationComponentImpl implements GeoLocationComponent {
 
     private Logger logger = LoggerFactory.getLogger(WeatherComponentImpl.class);

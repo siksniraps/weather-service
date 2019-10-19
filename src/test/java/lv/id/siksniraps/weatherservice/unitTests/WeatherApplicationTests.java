@@ -1,4 +1,4 @@
-package lv.id.siksniraps.weatherservice;
+package lv.id.siksniraps.weatherservice.unitTests;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

@@ -24,7 +24,7 @@ public class MockWeatherComponent implements WeatherComponent {
 
     private Logger logger = LoggerFactory.getLogger(MockWeatherComponent.class);
 
-    @Value("${weatherJson.Riga}")
+    @Value("${weather-json.riga}")
     private String pathName;
 
     @Override
