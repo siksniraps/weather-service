@@ -11,7 +11,7 @@ import static lv.id.siksniraps.weatherservice.config.CacheConfig.LOCATION_CACHE;
 @Service
 public class GeoLocationServiceImpl implements GeoLocationService {
 
-    public static final String GEOLOCATION_SERVICE_UNAVAILABLE = "Geolocation service is temporary unavailable";
+    public static final String GEOLOCATION_SERVICE_UNAVAILABLE = "Geolocation service is temporarily unavailable";
 
     private final GeoLocationComponent geoLocationComponent;
 

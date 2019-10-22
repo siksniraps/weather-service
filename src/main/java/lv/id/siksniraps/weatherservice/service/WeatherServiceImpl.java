@@ -17,7 +17,7 @@ import static lv.id.siksniraps.weatherservice.config.CacheConfig.WEATHER_CACHE;
 @Service
 public class WeatherServiceImpl implements WeatherService {
 
-    public static final String WEATHER_SERVICE_UNAVAILABLE = "Weather service is temporary unavailable";
+    public static final String WEATHER_SERVICE_UNAVAILABLE = "Weather service is temporarily unavailable";
 
     private final GeoLocationService geoLocationService;
     private final WeatherComponent weatherComponent;
