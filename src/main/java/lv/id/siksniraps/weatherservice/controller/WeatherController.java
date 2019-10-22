@@ -37,13 +37,6 @@ public class WeatherController {
         return badRequest().build();
     }
 
-    @GetMapping("/{ip}")
-    public ResponseEntity<Weather> testGetWeather(@PathVariable("ip") String ip) {
-        if (validateIp(ip)) {
-            return ok(weatherService.fetchWeatherFromIp(ip));
-        }
-        return badRequest().build();
-    }
 
     // check if ip is not local or loopback
     private boolean validateIp(String ip) {
