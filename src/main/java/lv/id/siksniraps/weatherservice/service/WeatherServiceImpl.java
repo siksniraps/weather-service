@@ -32,7 +32,7 @@ public class WeatherServiceImpl implements WeatherService {
 
     @Override
     public Weather fetchWeatherFromIp(String ip) {
-         Location location = geoLocationService.fetchLocationFromIp(ip);
+        Location location = geoLocationService.fetchLocationFromIp(ip);
         Weather weather = fetchWeatherByCity(location);
         saveWeatherForLocation(weather, location);
         return weather;

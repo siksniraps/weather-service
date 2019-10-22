@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @ControllerAdvice
 class ExternalServiceNotAvailableAdvice {
 
+  @SuppressWarnings("unused")
   @ResponseBody
   @ExceptionHandler(ExternalServiceUnavailableException.class)
   @ResponseStatus(HttpStatus.SERVICE_UNAVAILABLE)

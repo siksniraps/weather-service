@@ -6,9 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.core.env.Profiles;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.net.InetAddress;
@@ -33,12 +31,21 @@ public class WeatherController {
     @GetMapping
     public ResponseEntity<Weather> getWeather(HttpServletRequest request) {
         String ip = request.getRemoteAddr();
-        if (!validateIp(ip)) {
-            return badRequest().build();
+        if (validateIp(ip)) {
+            return ok(weatherService.fetchWeatherFromIp(ip));
         }
-        return ok(weatherService.fetchWeatherFromIp(ip));
+        return badRequest().build();
     }
 
+    @GetMapping("/{ip}")
+    public ResponseEntity<Weather> testGetWeather(@PathVariable("ip") String ip) {
+        if (validateIp(ip)) {
+            return ok(weatherService.fetchWeatherFromIp(ip));
+        }
+        return badRequest().build();
+    }
+
+    // check if ip is not local or loopback
     private boolean validateIp(String ip) {
         try {
             InetAddress inetAddr = InetAddress.getByName(ip);
